@@ -1,0 +1,10 @@
+node_modules/
+build/
+.env
+backend/.env
+frontend/.env.development
+uploads/
+*.log
+.DS_Store
+*.txt
+!README.md
