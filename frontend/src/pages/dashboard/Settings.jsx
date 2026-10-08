@@ -11,7 +11,8 @@ export default function Settings() {
   }, []);
 
   const shopSlug = shopConfig?.shop_slug || 'print-shop';
-  const qrUrl = `${window.location.origin}/order/${shopSlug}`;
+  const baseUrl = process.env.REACT_APP_PUBLIC_URL || window.location.origin;
+  const qrUrl = `${baseUrl}/order/${shopSlug}`;
 
   const copyUrl = () => {
     navigator.clipboard.writeText(qrUrl);
@@ -59,15 +60,15 @@ export default function Settings() {
           <div className="space-y-3">
             <div>
               <label className="block text-sm text-gray-600 mb-1">Shop Name</label>
-              <input defaultValue={shopConfig?.shop_name || ''} onBlur={(e) => saveShopInfo('shop_name', e.target.value)} className="w-full px-3 py-2 border rounded" />
+              <input key={`name-${shopConfig?.shop_name}`} defaultValue={shopConfig?.shop_name || ''} onBlur={(e) => saveShopInfo('shop_name', e.target.value)} className="w-full px-3 py-2 border rounded" />
             </div>
             <div>
               <label className="block text-sm text-gray-600 mb-1">Shop Address</label>
-              <input defaultValue={shopConfig?.shop_address || ''} onBlur={(e) => saveShopInfo('shop_address', e.target.value)} className="w-full px-3 py-2 border rounded" />
+              <input key={`addr-${shopConfig?.shop_address}`} defaultValue={shopConfig?.shop_address || ''} onBlur={(e) => saveShopInfo('shop_address', e.target.value)} className="w-full px-3 py-2 border rounded" />
             </div>
             <div>
               <label className="block text-sm text-gray-600 mb-1">Phone</label>
-              <input defaultValue={shopConfig?.phone || ''} onBlur={(e) => saveShopInfo('phone', e.target.value)} className="w-full px-3 py-2 border rounded" />
+              <input key={`phone-${shopConfig?.phone}`} defaultValue={shopConfig?.phone || ''} onBlur={(e) => saveShopInfo('phone', e.target.value)} className="w-full px-3 py-2 border rounded" />
             </div>
           </div>
         </div>
@@ -133,19 +134,19 @@ export default function Settings() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div>
               <label className="block text-sm text-gray-600 mb-1">B&W Single-Sided</label>
-              <input type="number" defaultValue={shopConfig?.pricing?.bw_single_sided || 2.5} onBlur={(e) => savePrice('bw_single_sided', e.target.value)} className="w-full px-3 py-2 border rounded" />
+              <input key={`bwss-${shopConfig?.pricing?.bw_single_sided}`} type="number" defaultValue={shopConfig?.pricing?.bw_single_sided || 2.5} onBlur={(e) => savePrice('bw_single_sided', e.target.value)} className="w-full px-3 py-2 border rounded" />
             </div>
             <div>
               <label className="block text-sm text-gray-600 mb-1">B&W Double-Sided</label>
-              <input type="number" defaultValue={shopConfig?.pricing?.bw_double_sided || 3.5} onBlur={(e) => savePrice('bw_double_sided', e.target.value)} className="w-full px-3 py-2 border rounded" />
+              <input key={`bwds-${shopConfig?.pricing?.bw_double_sided}`} type="number" defaultValue={shopConfig?.pricing?.bw_double_sided || 3.5} onBlur={(e) => savePrice('bw_double_sided', e.target.value)} className="w-full px-3 py-2 border rounded" />
             </div>
             <div>
               <label className="block text-sm text-gray-600 mb-1">Color Single-Sided</label>
-              <input type="number" defaultValue={shopConfig?.pricing?.color_single_sided || 8.0} onBlur={(e) => savePrice('color_single_sided', e.target.value)} className="w-full px-3 py-2 border rounded" />
+              <input key={`css-${shopConfig?.pricing?.color_single_sided}`} type="number" defaultValue={shopConfig?.pricing?.color_single_sided || 8.0} onBlur={(e) => savePrice('color_single_sided', e.target.value)} className="w-full px-3 py-2 border rounded" />
             </div>
             <div>
               <label className="block text-sm text-gray-600 mb-1">Color Double-Sided</label>
-              <input type="number" defaultValue={shopConfig?.pricing?.color_double_sided || 12.0} onBlur={(e) => savePrice('color_double_sided', e.target.value)} className="w-full px-3 py-2 border rounded" />
+              <input key={`cds-${shopConfig?.pricing?.color_double_sided}`} type="number" defaultValue={shopConfig?.pricing?.color_double_sided || 12.0} onBlur={(e) => savePrice('color_double_sided', e.target.value)} className="w-full px-3 py-2 border rounded" />
             </div>
           </div>
         </div>
